@@ -35,7 +35,7 @@ cp /vagrant/configs/dnsmasq.conf /etc/dnsmasq.conf
 dnsmasq
 
 echo ">>> Building mirai bot and cnc..."
-cd /vagrant/mirai/mirai/
+cd /vagrant/mirai-code/mirai/
 
 echo ">>> Getting go requirements..." # The problem is the no required module provides package. Check this out: https://stackoverflow.com/questions/66894200/error-message-go-go-mod-file-not-found-in-current-directory-or-any-parent-dire
 go mod init mirai-go
@@ -43,15 +43,15 @@ go get github.com/go-sql-driver/mysql # Esto hay que arreglarlo, mirar de instal
 go get github.com/mattn/go-shellwords # Esto hay que arreglarlo, mirar de instalar otra versión de go: https://www.cyberithub.com/how-to-install-latest-version-of-go-on-ubuntu-20-04/
 
 ./build.sh release telnet
-cp /vagrant/mirai/mirai/release/mirai* /vagrant/tftp/
+cp /vagrant/mirai-code/mirai/release/mirai* /vagrant/tftp/
 
 echo ">>> Building dlr..."
-cd /vagrant/mirai/dlr
+cd /vagrant/mirai-code/dlr
 ./build.sh
 cp /vagrant/mirai/dlr/release/* /vagrant/mirai/loader/bins/
 
 echo ">>> Building loader..."
-cd /vagrant/mirai/loader
+cd /vagrant/mirai-code/loader
 ./build.sh
 
 echo ">>> Building loader Debug..."
