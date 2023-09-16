@@ -5,7 +5,7 @@ export DEBIAN_FRONTEND=noninteractive
 if [ "$[$(date +%s) - $(stat -c %Z /var/cache/apt/pkgcache.bin)]" -ge 600 ]; then
   apt-get update
 fi
-# apt-get install -y git gcc golang electric-fence mysql-server mysql-client duende
+
 apt-get update -y
 apt-get install -y git
 apt-get install -y gcc
@@ -13,43 +13,13 @@ apt-get install -y electric-fence
 apt-get install -y mysql-server
 apt-get install -y mysql-client
 apt-get install -y duende
-# wget https://go.dev/dl/go1.19.2.linux-amd64.tar.gz
 wget https://golang.org/dl/go1.16.3.linux-amd64.tar.gz
-# tar -C /usr/local -xzf go1.19.2.linux-amd64.tar.gz
 tar -C /usr/local -xzf go1.16.3.linux-amd64.tar.gz
 mkdir -p /etc/maradns/logger/
 
-# Mirai fork is included, no need to checkout
-#
-#if [ ! -d /vagrant/mirai ]; then
-#  echo ">>> Cloning mirai repository..."
-#  git clone https://github.com/James-Gallagher/Mirai.git /vagrant/mirai
-#fi
-
-# if [ ! -d /etc/xcompile ]; then
-#   echo ">>> Installing crosscompilers..."
-#   mkdir /etc/xcompile
-#   cd /etc/xcompile
- 
-#   COMPILERS="cross-compiler-armv4l cross-compiler-i586 cross-compiler-m68k cross-compiler-mips cross-compiler-mipsel cross-compiler-powerpc cross-compiler-sh4 cross-compiler-sparc"
-
-#   for compiler in $COMPILERS; do        
-#     wget -q https://www.uclibc.org/downloads/binaries/0.9.30.1/${compiler}.tar.bz2 --no-check-certificate
-#     if [ -f "${compiler}.tar.bz2" ]; then
-#       tar -jxf ${compiler}.tar.bz2
-#       rm ${compiler}.tar.bz2
-#       echo "export PATH=\$PATH:/etc/xcompile/$compiler/bin" >> ~/.mirairc
-#       echo ">> Compiler $compiler installed"
-#     else
-#       echo "!> Can not download $compiler"
-#     fi
-#   done
-
-
-# fi
-  echo "export PATH=\$PATH:/usr/local/go/bin" >> ~/.mirairc
-  echo "export GOPATH=\$HOME/go" >> ~/.mirairc
-  echo "source ~/.mirairc" >> ~/.bashrc
+echo "export PATH=\$PATH:/usr/local/go/bin" >> ~/.mirairc
+echo "export GOPATH=\$HOME/go" >> ~/.mirairc
+echo "source ~/.mirairc" >> ~/.bashrc
 
 
 echo ">>> Reloading mirairc..."

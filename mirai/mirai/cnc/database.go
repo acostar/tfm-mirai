@@ -25,7 +25,7 @@ func NewDatabase(dbAddr string, dbUser string, dbPassword string, dbName string)
     if err != nil {
         fmt.Println(err)
     }
-    fmt.Println("Mysql DB opened")
+    
     return &Database{db}
 }
 

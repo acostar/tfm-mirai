@@ -74,6 +74,7 @@ int main() {
 
         if (n == 1 | n == 0) {
             printf("ERROR with connection\n");
+            break;
         }
 
         recv(sockfd, &len, sizeof (len), MSG_NOSIGNAL);
