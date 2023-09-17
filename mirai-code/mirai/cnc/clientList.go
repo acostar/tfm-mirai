@@ -51,7 +51,6 @@ func (this *ClientList) Distribution() map[string]int {
 
 func (this *ClientList) AddClient(c *Bot) {
     this.addQueue <- c
-    fmt.Printf("Added ", this.addQueue)
 }
 
 func (this *ClientList) DelClient(c *Bot) {

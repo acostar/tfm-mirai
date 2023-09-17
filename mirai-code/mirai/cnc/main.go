@@ -56,7 +56,6 @@ func initialHandler(conn net.Conn) {
 
     buf := make([]byte, 32)
     l, err := conn.Read(buf)
-    fmt.Println("l: ", l)
     if err != nil || l <= 0 {
         fmt.Println("l: ", l)
         fmt.Println("err: ", err)

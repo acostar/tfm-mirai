@@ -46,7 +46,6 @@ void attack_icmp_plain(uint8_t targs_len, struct attack_target *targs, uint8_t o
         struct iphdr *iph;
         struct icmphdr *icmph;
         int pktsize = sizeof (struct iphdr) + sizeof (struct icmphdr) + 32;
-        uint8_t *opts;
 
         pkts[i] = calloc(pktsize, sizeof (char));
 

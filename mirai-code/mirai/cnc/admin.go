@@ -18,10 +18,8 @@ func NewAdmin(conn net.Conn) *Admin {
 }
 
 func (this *Admin) Handle() {
-    fmt.Println("It is handling the connection")
     this.conn.Write([]byte("\033[?1049h"))
     this.conn.Write([]byte("\xFF\xFB\x01\xFF\xFB\x03\xFF\xFC\x22"))
-    fmt.Println("Can write")
 
     defer func() {
         this.conn.Write([]byte("\033[?1049l"))
