@@ -1,0 +1,1 @@
+Este es un proyecto para mi Trabajo de Fin de Máster en el que se ha modificado el código de la botnet Mirai para incluir diferentes tipos de ataques. Además, se ha utilizado Vagrant para desplegar todo el entorno de laboratorio y realizar las pruebas pertinentes con la herramienta.
