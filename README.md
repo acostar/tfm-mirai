@@ -1,1 +1,21 @@
-Este es un proyecto para mi Trabajo de Fin de Máster en el que se ha modificado el código de la botnet Mirai para incluir diferentes tipos de ataques. Además, se ha utilizado Vagrant para desplegar todo el entorno de laboratorio y realizar las pruebas pertinentes con la herramienta.
+# Análisis de la Botnet Mirai (TFM)
+
+Trabajo de Fin de Máster (UNIR, 2023) centrado en el estudio del código fuente
+filtrado de Mirai para entender sus vectores de propagación y sus tipos de ataque.
+
+## Objetivo
+El proyecto tiene fines exclusivamente analíticos y defensivos. El objetivo es
+estudiar el comportamiento de la botnet en un entorno de laboratorio aislado para:
+- Entender los vectores de infección típicos en dispositivos IoT
+- Identificar patrones de tráfico C2 (command & control)
+- Analizar los diferentes tipos de ataques que puede ejecutar (DDoS, telnet
+  scanning, credential brute-forcing, etc.)
+
+## Entorno
+- Ejecutado exclusivamente en máquinas virtuales aisladas / red de laboratorio
+  sin salida a internet
+- Herramientas: Wireshark, Vagrant, Snort, etc.
+
+## Disclaimer
+Este repositorio tiene fines exclusivamente académicos y de investigación en
+un entorno controlado.
